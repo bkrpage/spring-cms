@@ -2,21 +2,16 @@ package dev.bradleypage.post;
 
 import lombok.*;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.Instant;
 
 @Data
-@RequiredArgsConstructor
-@NoArgsConstructor
-@Entity
+@Document
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private ObjectId id;
 
     private @NonNull String title;

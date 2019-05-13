@@ -1,17 +1,15 @@
 package dev.bradleypage.post;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.time.Instant;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MetaData {
 
-    private String formatType;
-    private String author;
-    private Instant lastEdited;
+    private @NonNull String formatType;
+    private @NonNull String postType;
+    private @NonNull String author;
+    private @NonNull Instant lastEdited;
 }

@@ -24,20 +24,17 @@ public class Application {
     @Bean
     public CommandLineRunner demo(PostRepository repository) {
         return (args) -> {
-            // save a couple of customers
-
-
-
+            //save some example blogs
             repository.save(new Post("Case for Northern Independence", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                    new MetaData("plaintext", "Sansa Stark", Instant.now())));
+                    new MetaData("plaintext", "blog", "Sansa Stark", Instant.now())));
             repository.save(new Post("It's bigger than the throne", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                    new MetaData("plaintext", "Jon Snow (Aegon Targaryan)", Instant.now())));
+                    new MetaData("plaintext", "blog", "Jon Snow (Aegon Targaryan)", Instant.now())));
             repository.save(new Post("I am the True Heir", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                    new MetaData("plaintext", "Daenerys Targaryan", Instant.now())));
+                    new MetaData("plaintext", "blog", "Daenerys Targaryan", Instant.now())));
             repository.save(new Post("Hodor hodor", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                    new MetaData("plaintext", "Hodor", Instant.now())));
+                    new MetaData("plaintext", "blog", "Hodor", Instant.now())));
             repository.save(new Post("Daemon Targaryen's Wheelchair", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                    new MetaData("plaintext", "Brandon Stark (The3EyedR4v3n)", Instant.now())));
+                    new MetaData("plaintext", "blog", "Brandon Stark (The3EyedR4v3n)", Instant.now())));
 
             // fetch all customers
             log.info("Customers found with findAll():");
