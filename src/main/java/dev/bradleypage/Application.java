@@ -3,17 +3,22 @@ package dev.bradleypage;
 import dev.bradleypage.post.MetaData;
 import dev.bradleypage.post.Post;
 import dev.bradleypage.post.PostRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.time.Instant;
 
 @SpringBootApplication
 @Slf4j
+@RequiredArgsConstructor
 public class Application {
+
+    final MongoTemplate mongoTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -25,6 +30,8 @@ public class Application {
     public CommandLineRunner demo(PostRepository repository) {
         return (args) -> {
             //save some example blogs
+
+            mongoTemplate.getDb().drop();
 
             if (repository.findAll().size() <= 0) {
                 repository.save(new Post("Case for Northern Independence", "Lorem Ipsum Dolir sit amet", Instant.now(),
@@ -49,9 +56,6 @@ public class Application {
             log.info("Customer found with find by authro namre");
             log.info("--------------------------------------------");
             repository.findByMetaDataAuthor("Sansa Stark").forEach(post -> log.info(post.toString()));
-            // for (Customer bauer : repository.findByLastName("Bauer")) {
-            // 	log.info(bauer.toString());
-            // }
             log.info("");
         };
     }
