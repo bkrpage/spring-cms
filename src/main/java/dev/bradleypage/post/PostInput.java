@@ -7,13 +7,13 @@ import javax.validation.constraints.NotBlank;
 import java.time.Instant;
 
 @Data
-public class PostInput {
+class PostInput {
 
     @NotBlank
     private String title;
     @NotBlank
     private String bodyText;
-    @NotBlank
+
     private String posted = Instant.now().toString();
 
     @Valid

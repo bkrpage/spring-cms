@@ -3,6 +3,7 @@ package dev.bradleypage.post;
 import dev.bradleypage.mapping.BsonMapper;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -19,5 +20,8 @@ public interface PostMapper extends BsonMapper {
     @InheritInverseConfiguration
     List<Post> mapObject(List<PostOutput> outputs);
 
+    PostInput mapInput(Post post);
+
+    @InheritInverseConfiguration
     Post mapObject(PostInput input);
 }

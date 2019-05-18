@@ -3,7 +3,6 @@ package dev.bradleypage.post;
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -37,23 +36,19 @@ public class PostController {
     PostOutput submitPost(
             @Valid @RequestBody PostInput postInput
     ) {
-        Post post = mapper.mapObject(postInput);
-        repository.save(post);
-
-        return mapper.mapOutput(post);
+        return mapper.mapOutput(repository.save(mapper.mapObject(postInput)));
     }
 
+    /**
+     * Using https://www.baeldung.com/spring-boot-bean-validation
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex
     ) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
+        ex.getBindingResult().getAllErrors().forEach((error) -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
         return errors;
     }
 
