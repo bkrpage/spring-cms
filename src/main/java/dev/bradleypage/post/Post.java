@@ -17,9 +17,9 @@ public class Post {
     @Id
     private ObjectId id;
 
-    private String title;
-    private String bodyText;
+    private @NonNull String title;
+    private @NonNull String bodyText;
     @Builder.Default private Instant posted = Instant.now();
-    private MetaData metaData;
+    private @NonNull MetaData metaData;
 
 }

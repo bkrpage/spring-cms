@@ -12,9 +12,7 @@ public class PostInput {
     @NotBlank
     private String title;
     @NotBlank
-    private String body;
-    @NotBlank
-    private String author;
+    private String bodyText;
     @NotBlank
     private String posted = Instant.now().toString();
 
