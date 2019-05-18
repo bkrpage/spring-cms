@@ -17,26 +17,33 @@ import java.util.Map;
 public class PostController {
 
     private final PostRepository repository;
-    private final PostMapper mapper;
+    private final PostMapper map;
 
 
     @GetMapping("/posts")
     List<PostOutput> getAllPosts() {
-        return mapper.mapOutput(repository.findAll());
+        return map.postListToOutputList(repository.findAll());
     }
 
     @GetMapping("/post/{id}")
     PostOutput getPost(
             @PathVariable String id
     ) {
-        return mapper.mapOutput(repository.findById(new ObjectId(id)).orElse(null));
+        return map.postToOutput(repository.findById(new ObjectId(id)).orElse(null));
     }
 
     @PostMapping("/post")
     PostOutput submitPost(
             @Valid @RequestBody PostInput postInput
     ) {
-        return mapper.mapOutput(repository.save(mapper.mapObject(postInput)));
+        return map.postToOutput(repository.save(map.inputToPost(postInput)));
+    }
+
+    @PostMapping("/posts")
+    List<PostOutput> submitPosts(
+            @Valid @RequestBody List<PostInput> postInputs
+    ) {
+        return map.postListToOutputList(repository.saveAll(map.inputListToPostList(postInputs)));
     }
 
     /**
