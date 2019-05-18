@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PostOutput {
+class PostOutput {
 
     private String id;
 
