@@ -2,9 +2,8 @@ package dev.bradleypage.post;
 
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,17 @@ public class PostController {
             @PathVariable String id
     ) {
         return mapper.mapOutput(repository.findById(new ObjectId(id)).orElse(null));
+    }
+
+    @PostMapping("/post")
+    PostOutput submitPost(
+            @ModelAttribute PostInput postInput,
+            BindingResult result
+    ) {
+        //TODO handle validation
+        Post post = mapper.mapObject(postInput);
+        repository.save(post);
+
+        return mapper.mapOutput(post);
     }
 }

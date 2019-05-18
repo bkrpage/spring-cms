@@ -25,25 +25,55 @@ public class Application {
     }
 
 
-
     @Bean
     public CommandLineRunner demo(PostRepository repository) {
         return (args) -> {
             //save some example blogs
 
-            mongoTemplate.getDb().drop();
-
             if (repository.findAll().size() <= 0) {
-                repository.save(new Post("Case for Northern Independence", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                        new MetaData("plaintext", "blog", "Sansa Stark", Instant.now())));
-                repository.save(new Post("It's bigger than the throne", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                        new MetaData("plaintext", "blog", "Jon Snow (Aegon Targaryan)", Instant.now())));
-                repository.save(new Post("I am the True Heir", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                        new MetaData("plaintext", "blog", "Daenerys Targaryan", Instant.now())));
-                repository.save(new Post("Hodor hodor", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                        new MetaData("plaintext", "blog", "Hodor", Instant.now())));
-                repository.save(new Post("Daemon Targaryen's Wheelchair", "Lorem Ipsum Dolir sit amet", Instant.now(),
-                        new MetaData("plaintext", "blog", "Brandon Stark (The3EyedR4v3n)", Instant.now())));
+                log.info("Saving example post Objects");
+
+                repository.save(
+                        Post.builder()
+                                .title("Case for Northern Independence")
+                                .bodyText("Lorem ipsum blah blah blah")
+                                .metaData(
+                                        MetaData.builder()
+                                                .formatType("plaintext")
+                                                .author("Sansa Stark")
+                                                .postType("blog")
+                                                .build()
+                                )
+                                .build()
+                );
+
+                repository.save(
+                        Post.builder()
+                                .title("It's bigger than the throne")
+                                .bodyText("<b>Lorem ipsum</b> blah blah blah")
+                                .metaData(
+                                        MetaData.builder()
+                                                .formatType("html")
+                                                .author("Jon Snow (Aegon Targaryan)")
+                                                .postType("blog")
+                                                .build()
+                                )
+                                .build()
+                );
+
+                repository.save(
+                        Post.builder()
+                                .title("Hodor hodor")
+                                .bodyText("<b>Lorem ipsum</b> blah blah blah")
+                                .metaData(
+                                        MetaData.builder()
+                                                .formatType("plaintext")
+                                                .author("Hodor")
+                                                .postType("blog")
+                                                .build()
+                                )
+                                .build()
+                );
             }
 
             // fetch all customers
@@ -53,7 +83,7 @@ public class Application {
             log.info("");
 
             // fetch customers by last name
-            log.info("Customer found with find by authro namre");
+            log.info("Customer found with find by author name");
             log.info("--------------------------------------------");
             repository.findByMetaDataAuthor("Sansa Stark").forEach(post -> log.info(post.toString()));
             log.info("");

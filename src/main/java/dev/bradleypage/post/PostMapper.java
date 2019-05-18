@@ -18,4 +18,6 @@ public interface PostMapper extends BsonMapper {
 
     @InheritInverseConfiguration
     List<Post> mapObject(List<PostOutput> outputs);
+
+    Post mapObject(PostInput input);
 }

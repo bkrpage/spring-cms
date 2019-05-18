@@ -8,17 +8,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Document
 public class Post {
 
     @Id
     private ObjectId id;
 
-    private @NonNull String title;
-    private @NonNull String bodyText;
-    private @NonNull Instant posted;
-    private @NonNull MetaData metaData;
+    private String title;
+    private String bodyText;
+    @Builder.Default private Instant posted = Instant.now();
+    private MetaData metaData;
 
 }
