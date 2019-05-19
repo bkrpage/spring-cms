@@ -27,5 +27,9 @@ public interface AuthorMapper extends BsonMapper {
 
     AuthorPostInput authorToPostInput(Author author);
     @InheritInverseConfiguration
-    Author postInputToAuthor(AuthorPostInput author);
+    Author postInputToAuthor(AuthorPostInput input);
+
+    AuthorInput authorToInput(Author author);
+    @InheritInverseConfiguration
+    Author inputToAuthor(AuthorInput input);
 }
