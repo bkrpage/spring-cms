@@ -16,6 +16,7 @@ import java.util.Map;
 public class AuthorController {
 
     private final AuthorRepository repository;
+    private final AuthorService service;
     private final AuthorMapper map;
 
 
@@ -27,8 +28,8 @@ public class AuthorController {
     @PostMapping("/author")
     AuthorOutput submitSingleAuthor(
         @Valid @RequestBody AuthorInput input
-    ) {
-        return map.authorToOutput(repository.save(map.inputToAuthor(input)));
+    ) throws DuplicateUsernameException {
+        return map.authorToOutput(service.createNewAuthor(input));
     }
 
 
@@ -45,6 +46,17 @@ public class AuthorController {
     ) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
+        return errors;
+    }
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DuplicateUsernameException.class)
+    public Map<String, String> handleUsernameException(
+            DuplicateUsernameException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("username", ex.getMessage());
         return errors;
     }
 
