@@ -10,11 +10,12 @@ import org.mapstruct.InheritInverseConfiguration;
  */
 public interface BsonMapper {
 
-    default String map(ObjectId id){
+    default String map(ObjectId id) {
         return id.toString();
     }
+
     @InheritInverseConfiguration
-    default ObjectId map(String id){
+    default ObjectId map(String id) {
         return new ObjectId(id);
     }
 }

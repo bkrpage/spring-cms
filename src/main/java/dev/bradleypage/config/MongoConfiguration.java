@@ -18,9 +18,4 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     public MongoClient mongoClient() {
         return new MongoClient("127.0.0.1", 27017);
     }
-
-    @Override
-    protected String getMappingBasePackage() {
-        return "dev.bradleypage";
-    }
 }

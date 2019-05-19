@@ -10,4 +10,6 @@ import java.util.List;
 public interface AuthorRepository extends MongoRepository<Author, ObjectId> {
 
     List<Author> findByUsername(@Param("username") String username);
+
+    List<Author> findByUsernameIgnoreCase(@Param("username") String username);
 }

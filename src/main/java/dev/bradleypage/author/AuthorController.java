@@ -27,16 +27,14 @@ public class AuthorController {
 
     @PostMapping("/author")
     AuthorOutput submitSingleAuthor(
-        @Valid @RequestBody AuthorInput input
+            @Valid @RequestBody AuthorInput input
     ) throws DuplicateUsernameException {
         return map.authorToOutput(service.createNewAuthor(input));
     }
 
 
-
     /**
      * Using https://www.baeldung.com/spring-boot-bean-validation
-     *
      * //TODO add this to controller advice or base controller.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)

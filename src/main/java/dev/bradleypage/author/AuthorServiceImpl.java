@@ -16,17 +16,21 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author createNewAuthor(AuthorInput authorInput) throws DuplicateUsernameException {
-
-        if (usernameExists(authorInput.getUsername())){
-            throw new DuplicateUsernameException(
-                    String.format(DUPLICATE_USERNAME_ERROR, authorInput.getUsername())
-            );
-        }
-        return repository.save(map.inputToAuthor(authorInput));
+        return createNewAuthor(map.inputToAuthor(authorInput));
     }
 
-    private boolean usernameExists(String username){
-        List<Author> existing  = repository.findByUsername(username);
+    @Override
+    public Author createNewAuthor(Author author) throws DuplicateUsernameException {
+        if (usernameExists(author.getUsername())) {
+            throw new DuplicateUsernameException(
+                    String.format(DUPLICATE_USERNAME_ERROR, author.getUsername())
+            );
+        }
+        return repository.save(author);
+    }
+
+    private boolean usernameExists(String username) {
+        List<Author> existing = repository.findByUsernameIgnoreCase(username);
         return (existing.size() > 0);
     }
 }

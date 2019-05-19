@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 public interface AuthorService {
 
     Author createNewAuthor(AuthorInput author) throws DuplicateUsernameException;
+
+    Author createNewAuthor(Author author) throws DuplicateUsernameException;
 }

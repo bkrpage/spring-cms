@@ -20,5 +20,4 @@ class PostInput {
     private MetaDataInput metaData;
 
 
-
 }

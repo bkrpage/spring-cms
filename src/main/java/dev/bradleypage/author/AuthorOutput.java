@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
- class AuthorOutput {
+class AuthorOutput {
 
 
     private String id;

@@ -126,12 +126,6 @@ public class Application {
             log.info("-------------------------------");
             repository.findAll().forEach(post -> log.info(post.toString()));
             log.info("");
-
-            // fetch customers by last name
-//            log.info("Customer found with find by author name");
-//            log.info("--------------------------------------------");
-//            repository.findByMetaDataAuthor("Sansa Stark").forEach(post -> log.info(post.toString()));
-//            log.info("");
         };
     }
 }

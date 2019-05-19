@@ -3,10 +3,11 @@ package dev.bradleypage.post;
 import dev.bradleypage.mapping.BsonMapper;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PostMapper extends BsonMapper {
 
     PostOutput postToOutput(Post post);

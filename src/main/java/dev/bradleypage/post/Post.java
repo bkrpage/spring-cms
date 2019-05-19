@@ -19,7 +19,8 @@ public class Post {
 
     private @NonNull String title;
     private @NonNull String bodyText;
-    @Builder.Default private Instant posted = Instant.now();
+    @Builder.Default
+    private Instant posted = Instant.now();
     private @NonNull MetaData metaData;
 
 }
