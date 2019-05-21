@@ -15,7 +15,8 @@ import java.util.List;
 @Builder
 public class MetaData {
 
-    private String formatType;
+    @Builder.Default
+    private String formatType = "plainText";
     private String postType;
     private List<Author> authors;
     @Builder.Default
