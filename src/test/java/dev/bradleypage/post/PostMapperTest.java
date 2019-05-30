@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 @NoArgsConstructor
 @Component
 @RunWith(SpringRunner.class)
-// Need to add the MapStruct Generates Implementation to get it Autowiring.
+// Need to add the MapStruct Generated Implementation to get it Autowiring.
 @SpringBootTest(classes = {PostMapperImpl.class})
 public class PostMapperTest {
 
