@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    private final CustomSavedRequestAwareAuthenticationSuccessHandler customSavedRequestAwareAuthenticationSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -38,18 +37,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
+                .and()
+                .httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
-                .formLogin()
-                .successHandler(customSavedRequestAwareAuthenticationSuccessHandler)
-                .failureHandler(failureHandler())
-                .and()
+                .csrf().disable()
+                .formLogin().disable()
                 .logout();
     }
 
